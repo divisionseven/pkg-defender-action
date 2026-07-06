@@ -1,0 +1,28 @@
+name: 'Package Defender Security Audit'
+description: 'Security auditing for npm, PyPI, Cargo, and RubyGems packages'
+author: 'divisionseven'
+branding:
+  icon: 'shield'
+  color: 'green'
+
+inputs:
+  fail-on:
+    description: 'Minimum severity to fail workflow (critical, high, medium, low, none)'
+    required: false
+    default: 'high'
+  lock-files:
+    description: 'Glob pattern for lock files to scan'
+    required: false
+    default: '**/package-lock.json,**/yarn.lock,**/pnpm-lock.yaml,**/Pipfile.lock,**/poetry.lock,**/uv.lock,**/requirements.txt'
+
+outputs:
+  findings:
+    description: 'JSON array of findings'
+  summary:
+    description: 'Human-readable summary of results'
+  exit-code:
+    description: 'Exit code from the audit'
+
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
