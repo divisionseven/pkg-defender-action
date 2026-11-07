@@ -8,8 +8,27 @@ and this project adheres to
 
 ## [Unreleased]
 
-## Fixed
+## [1.0.1] - 2026-11-06
 
+### Changed
+
+- Renamed the action to "PKG-Defender Security Audit" in `action.yml`.
+
+### Fixed
+
+- Bumped the npm `undici` override 6.28.0 → 6.29.1 to remediate the remaining
+  undici advisories (including GHSA-2m5v-pch6-74hx, TLS certificate validation
+  bypass via dropped `tls` options in `Agent`, and several denial-of-service
+  issues), updated dev-chain dependencies `js-yaml` 3.15.1 → 3.15.2 and
+  `brace-expansion` 2.1.4 → 2.1.7 and 1.1.18 → 1.1.21, and rebuilt
+  `dist/index.js` so the shipped bundle runs patched undici.
+- Bumped the npm `undici` override 6.27.0 → 6.28.0 to remediate
+  CVE-2026-16728 / CVE-2026-15157 / CVE-2026-16729, refreshed dev-chain
+  dependencies `brace-expansion` 2.1.2 → 2.1.4 and 1.1.16 → 1.1.18
+  (GHSA-rgw5-rvv9-x895 / CVE-2026-69152) and `js-yaml` 3.15.0 → 3.15.1
+  (GHSA-5p4m-2wfm-xmqj), and rebuilt `dist/index.js` so the shipped bundle
+  runs patched undici. The undici delta crosses no breaking-change entries —
+  breaking items belong to releases ≤6.27.0, already inside the prior override.
 - Replaced `@actions/glob` with `fast-glob@3.3.x` to remediate two HIGH-severity
   denial-of-service vulnerabilities in `brace-expansion`:
   GHSA-3jxr-9vmj-r5cp (CVE-2026-13149, exponential-time expansion) and
